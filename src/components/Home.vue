@@ -2,14 +2,14 @@
   <div class="view">
     <div class="wrapper">
       <div class="progress">
-        <el-progress :percentage="$store.state.percent" status=""></el-progress>
+        <el-progress :percentage="$store.state.percent" ></el-progress>
       </div>
       <div class="setting">
         <el-button class="btn" type="primary" icon="el-icon-setting">settings</el-button>
       </div>
       <div class="main"></div>
       <div class="control">
-        <el-button class="btn" circle size="medium">
+        <el-button class="btn" circle size="medium" @click="_play">
           <i class="iconfont icon-bofang"></i>
         </el-button>
         <el-button class="btn" circle size="medium">
@@ -28,6 +28,11 @@ export default {
       testNum: 10,
     }
   },
+  methods: {
+    _play() {
+      console.log("ok")    
+    },
+  }
 }
 </script>
 
