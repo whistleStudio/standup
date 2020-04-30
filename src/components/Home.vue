@@ -2,19 +2,23 @@
   <div class="view">
     <div class="wrapper">
       <div class="progress">
-        <el-progress :percentage="$store.state.percent" ></el-progress>
+        <el-progress :percentage="$store.state.percent" :format="format"></el-progress>
       </div>
       <div class="setting">
-        <el-button class="btn" type="primary" icon="el-icon-setting">settings</el-button>
+        <el-button class="btn" type="primary" icon="el-icon-setting" @click="_goSettings">settings</el-button>
       </div>
       <div class="main"></div>
       <div class="control">
-        <el-button class="btn" circle size="medium" @click="_play">
-          <i class="iconfont icon-bofang"></i>
-        </el-button>
-        <el-button class="btn" circle size="medium">
+        <el-button v-if="isPlay" class="btn" circle size="medium" @click="_pause" :disabled="!$store.state.percent">
           <i class="iconfont icon-zanting"></i>
         </el-button>
+        <el-button v-else class="btn" circle size="medium" @click="_play">
+          <i class="iconfont icon-bofang"></i>
+        </el-button>
+        <el-button class="btn" circle size="medium" @click="_refresh">
+          <i class="iconfont icon-huanyuan-shuaxin"></i>
+        </el-button>
+        <audio v-if="!$store.state.percent" src="~assets/audio/xch.mp3" autoplay></audio>
       </div>
     </div>   
   </div>
@@ -26,74 +30,45 @@ export default {
   data() {
     return {
       testNum: 10,
+      isPlay: false,
     }
   },
   methods: {
-    _play() {
-      console.log("ok")    
+    format(percentage) {
+      return `${parseInt(percentage)}%`;
     },
+    _play() {
+      console.log("play ok")
+      this.isPlay = !this.isPlay    
+      this.$store.dispatch("_playA")
+      this.$store.state.testNum --
+      console.log("--------", this.$store.state.testNum)
+    },
+    _pause() {
+      console.log("pause ok")
+      this.isPlay = !this.isPlay    
+      clearInterval(this.$store.state.timerIdP)
+    },
+    _refresh() {
+      console.log("refresh ok")
+      this.isPlay = false
+      clearInterval(this.$store.state.timerIdP)
+      this.$store.commit("_freshM")
+    },
+    _goSettings() {
+      this.$router.push("/settings")
+    }
+  },
+  mounted() {
+    // this.audio = new Audio()
+    // this.audio.src = "~assets/audio/xch.wav"
+    // console.log(this.audio)
+    // this.audio = audio
   }
 }
 </script>
 
 <style scoped>
   @import url("https://at.alicdn.com/t/font_1791024_xgqtkfmw2i.css");
-  .view {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .wrapper {
-    width: 80%;
-    height: 80%;
-    display: grid;
-    grid: 1fr 5fr 1fr / 1fr 5fr 1fr;
-    grid-template-areas: ". progress setting"
-                         ". main ."
-                         ". control ."
-  }
-  .wrapper>div {
-    /* border: 1px solid rgb(0, 0, 0, 0.3); */
-  }
-  .progress {
-    grid-area: progress;
-    /* background-color: pink; */
-    align-self: end;
-    text-align: center;
-  }
-  .setting {
-    grid-area: setting;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  .setting>.btn {
-    width: 8rem;
-    height: 3rem;
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  .main {
-    grid-area: main;
-    background-color: skyblue;
-    background: url("~assets/image/fftq.jpg");
-    background-size: cover;
-    border-radius: 1rem;
-  }
-  .control {
-    grid-area: control;
-    text-align: center;
-  }
-  .control>.btn {
-    margin-top: 1.5rem;
-    width: 5rem;
-    height: 5rem;
-    
-    /* background-color: red; */
-  }
-  .iconfont {
-    font-size: 2rem;
-  }
+  @import url("~assets/css/Home.css");
 </style>
