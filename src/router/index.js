@@ -15,10 +15,10 @@ const routes = [
     path: "/home",
     component: Home
   },
-  {
-    path: "/settings",
-    component: Settings
-  }
+  // {
+  //   path: "/settings",
+  //   component: Settings
+  // }
 ]
 
 const router = new VueRouter({

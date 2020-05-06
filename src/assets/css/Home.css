@@ -37,8 +37,8 @@
 }
 .main {
   grid-area: main;
-  background: url("~assets/image/fftq.jpg");
-  background-size: cover;
+  /* background: url("~assets/image/fftq.jpg"); */
+  /* background-size: cover; */
   border-radius: 1rem;
 }
 .control {
