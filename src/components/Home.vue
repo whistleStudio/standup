@@ -67,23 +67,23 @@ export default {
   },
   methods: {
     format(percentage) {
-      return `${(parseInt(percentage)/100*parseInt(this.countdown)).toFixed(1)}m`;
+      return `${(parseFloat(percentage)/100*parseFloat(this.countdown)).toFixed(1)}m`;
     },
     _play() {
-      console.log("play ok")
+      // console.log("play ok")
       this.imgIdx = 1
       this.isPlay = !this.isPlay    
       this.$store.dispatch("_playA", parseFloat(this.countdown)*60)
       this.$store.state.testNum --
-      console.log("--------", this.$store.state.testNum)
+      // console.log("--------", this.$store.state.testNum)
     },
     _pause() {
-      console.log("pause ok")
+      // console.log("pause ok")
       this.isPlay = !this.isPlay    
       clearInterval(this.$store.state.timerIdP)
     },
     _refresh() {
-      console.log("refresh ok")
+      // console.log("refresh ok")
       this.imgIdx = 0
       this.isPlay = false
       clearInterval(this.$store.state.timerIdP)

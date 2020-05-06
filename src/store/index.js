@@ -13,7 +13,7 @@ export default new Vuex.Store({
     _playM(state, ctd) {
       let ratio = 0.2/ctd*100
       state.percent = state.percent-ratio<=0 ? 0 : parseFloat((state.percent-ratio).toFixed(2))
-      console.log(state.percent)
+      // console.log(state.percent)
     },
     _freshM(state) {
       state.percent = 100
