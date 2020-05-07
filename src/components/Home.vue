@@ -19,7 +19,8 @@
         <el-button class="btn" circle size="medium" @click="_refresh">
           <i class="iconfont icon-huanyuan-shuaxin"></i>
         </el-button>
-        <audio v-if="!$store.state.percent" src="~assets/audio/xch.mp3" autoplay></audio>
+        <!-- !$store.state.percent -->
+        <audio v-if="!$store.state.percent" src="~assets/audio/bear.mp3"  autoplay  type="audio/mpeg"></audio>
       </div>
     </div> 
     <el-dialog
@@ -47,6 +48,8 @@
 </template>
 
 <script>
+// const src = require("assets/audio/bear.mp3")
+// const music = new Audio(src)
 export default {
   name: "Home",
   data() {
@@ -62,7 +65,8 @@ export default {
         require("assets/image/home.png"),
         require("assets/image/fftq.jpg"),
         require("assets/image/rest.png")
-      ]
+      ],
+      
     }
   },
   methods: {
@@ -71,6 +75,7 @@ export default {
     },
     _play() {
       // console.log("play ok")
+      // music.play()
       this.imgIdx = 1
       this.isPlay = !this.isPlay    
       this.$store.dispatch("_playA", parseFloat(this.countdown)*60)
@@ -121,10 +126,7 @@ export default {
     }
   },
   mounted() {
-    // this.audio = new Audio()
-    // this.audio.src = "~assets/audio/xch.wav"
-    // console.log(this.audio)
-    // this.audio = audio
+    
   }
 }
 </script>
