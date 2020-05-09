@@ -20,7 +20,7 @@
           <i class="iconfont icon-huanyuan-shuaxin"></i>
         </el-button>
         <!-- !$store.state.percent -->
-        <audio v-if="!$store.state.percent" src="~assets/audio/bear.mp3"  autoplay  type="audio/mpeg"></audio>
+        <audio v-if="!$store.state.percent" :src="musicSrc"  autoplay  type="audio/mpeg"></audio>
       </div>
     </div> 
     <el-dialog
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-// const src = require("assets/audio/bear.mp3")
+// const src = process.env.BASE_URL + "xch.mp3"
 // const music = new Audio(src)
 export default {
   name: "Home",
@@ -66,7 +66,7 @@ export default {
         require("assets/image/fftq.jpg"),
         require("assets/image/rest.png")
       ],
-      
+      musicSrc: "https://m8.music.126.net/20200509153756/b4d372adedc2d649adb5dcfaef8edda5/ymusic/025d/005b/565d/57385446517139fdd73ba70420ed7140.mp3"
     }
   },
   methods: {
